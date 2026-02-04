@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+
+<!-- 🔑 NAJWAŻNIEJSZE DLA TELEFONU -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Moja Walentynka</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(#ffd6e7, #fff0f5);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 80px;
+  padding: 0 20px;
+  font-size: 28px;
+  color: #c2185b;
+}
+
+button {
+  font-size: 22px;
+  padding: 15px 30px;
+  margin: 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#tak {
+  background: #ff4081;
+  color: white;
+}
+
+#nie {
+  background: #f8bbd0;
+}
+
+#odpowiedz {
+  font-size: 26px;
+  margin-top: 30px;
+  color: #ad1457;
+}
+
+/* ❤️ SERDUSZKA – NIE BLOKUJĄ DOTYKU */
+.heart {
+  position: fixed;
+  top: -20px;
+  font-size: 24px;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+/* 🐰 KRÓLICZKI */
+.bunny {
+  position: fixed;
+  bottom: 10px;
+  font-size: 40px;
+  animation: hop 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes hop {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* 📱 LEPSZE DLA MAŁYCH EKRANÓW */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+    margin-top: 60px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 14px 26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Cześć Lenko, czy zostaniesz moją walentynką? ❤️🐰</h1>
+
+<button id="tak" onclick="tak()">TAK 💖</button>
+<button id="nie" onclick="nie()">NIE 😥</button>
+
+<div id="odpowiedz"></div>
+
+<div class="bunny" style="left:10%">🐰</div>
+<div class="bunny" style="left:80%">🐇</div>
+
+<script>
+function tak() {
+  document.getElementById("odpowiedz").innerHTML =
+    "Jeej!! 💞🐰 Wiedziałem!";
+
+  burstHearts();
+}
+
+function nie() {
+  document.getElementById("odpowiedz").innerHTML =
+    "Spróbuj jeszcze raz 💗";
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+function burstHearts() {
+  for (let i = 0; i < 25; i++) {
+    setTimeout(createHeart, i * 120);
+  }
+}
+
+setInterval(createHeart, 600);
+</script>
+
+</body>
+</html>
